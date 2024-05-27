@@ -29,11 +29,11 @@ export default function CategoriesPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Categories</BreadcrumbPage>
+            <BreadcrumbPage>Teachers</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <PageContent>Page</PageContent>
+      <PageContent>hey</PageContent>
     </ContentLayout>
   );
 }
