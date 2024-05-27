@@ -4,7 +4,8 @@ import {
   Settings,
   Bookmark,
   SquarePen,
-  LayoutGrid
+  LayoutGrid,
+  DoorOpen
 } from "lucide-react";
 
 type Submenu = {
@@ -86,6 +87,29 @@ export function getMenuList(pathname: string): Group[] {
               href: "/teachers/edit",
               label: "Edit Teacher",
               active: pathname === "/teachers/edit"
+            }
+          ]
+        },
+        {
+          href: "",
+          label: "Classrooms",
+          active: pathname.includes("/classrooms"),
+          icon: DoorOpen,
+          submenus: [
+            {
+              href: "/classrooms",
+              label: "All Classrooms",
+              active: pathname === "/classrooms"
+            },
+            {
+              href: "/classrooms/add",
+              label: "Add Classroom",
+              active: pathname === "/classrooms/add"
+            },
+            {
+              href: "/classrooms/edit",
+              label: "Edit Classroom",
+              active: pathname === "/classrooms/edit"
             }
           ]
         },

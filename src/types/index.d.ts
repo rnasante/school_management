@@ -7,3 +7,12 @@ declare type DashboardSummaryProps = {
 declare type CardHeaderProps = {
   label: string;
 };
+
+declare type User = {
+  id: number;
+  name: string;
+  company: string;
+  role: string;
+  verified: boolean;
+  status: string;
+};
