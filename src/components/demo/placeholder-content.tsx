@@ -9,7 +9,7 @@ export default function PageContent({
   children: React.ReactNode;
 }) {
   return (
-    <Card className="rounded-lg border-none mt-6 h-[95%]">
+    <Card className="rounded-lg border-none mt-6 h-[95%] overflow-scroll overflow-x-hidden">
       <CardContent className="p-6">{children}</CardContent>
     </Card>
   );
