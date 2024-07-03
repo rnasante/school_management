@@ -4,7 +4,8 @@ import {
   Settings,
   Bookmark,
   SquarePen,
-  LayoutGrid
+  LayoutGrid,
+  DoorOpen
 } from "lucide-react";
 
 type Submenu = {
@@ -45,28 +46,72 @@ export function getMenuList(pathname: string): Group[] {
       menus: [
         {
           href: "",
-          label: "Posts",
-          active: pathname.includes("/posts"),
+          label: "Students",
+          active: pathname.includes("/student"),
           icon: SquarePen,
           submenus: [
             {
-              href: "/posts",
-              label: "All Posts",
-              active: pathname === "/posts"
+              href: "/students",
+              label: "All Students",
+              active: pathname === "/students"
             },
             {
-              href: "/posts/new",
-              label: "New Post",
-              active: pathname === "/posts/new"
+              href: "/students/new",
+              label: "Add Student",
+              active: pathname === "/students/new"
+            },
+            {
+              href: "/students/edit",
+              label: "Edit Student",
+              active: pathname === "/students/edit"
             }
           ]
         },
         {
-          href: "/categories",
-          label: "Categories",
-          active: pathname.includes("/categories"),
+          href: "",
+          label: "Teachers",
+          active: pathname.includes("/teachers"),
           icon: Bookmark,
-          submenus: []
+          submenus: [
+            {
+              href: "/teachers",
+              label: "All Teachers",
+              active: pathname === "/teachers"
+            },
+            {
+              href: "/teachers/add",
+              label: "Add Teacher",
+              active: pathname === "/teachers/add"
+            },
+            {
+              href: "/teachers/edit",
+              label: "Edit Teacher",
+              active: pathname === "/teachers/edit"
+            }
+          ]
+        },
+        {
+          href: "",
+          label: "Classrooms",
+          active: pathname.includes("/classrooms"),
+          icon: DoorOpen,
+          submenus: [
+            {
+              href: "/classrooms",
+              label: "All Classrooms",
+              active: pathname === "/classrooms"
+            },
+            {
+              href: "/classrooms/add",
+              label: "Add Classroom",
+              active: pathname === "/classrooms/add"
+            },
+            {
+              href: "/classrooms/edit",
+              label: "Edit Classroom",
+              active: pathname === "/classrooms/edit"
+            }
+          ]
         },
         {
           href: "/tags",
