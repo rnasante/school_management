@@ -1,46 +1,30 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
-const app = express();
-const port = 3001;
+import express from 'express';
+import next from 'next';
+//const app = express();
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+// const port = 3000;
 
-app.use(bodyParser.json());
+import studentRoutes from './routes/studentRoutes.js';
 
-// MySQL connection
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'sms'
-});
+app.prepare().then(() => {
+    const server = express(); 
+// Ensure `server` is declared here
 
-db.connect(err => {
-    if (err) {
-        console.error('Error connecting to the database:', err.stack);
-        return;
-    }
-    console.log('Connected to the database.');
-});
 
-// Serve static files from the frontend
-app.use(express.static('public'));
+// Get all student routes
+   server.use('/api',  studentRoutes);
+   console.log('Student routes loaded under /api');
 
-// Example route
-app.get('/api', (req, res) => {
-    res.send('API is working!');
-});
+  // Handling Next.js pages
+   server.get('*', (req, res) => {
+     return handle(req, res);
+   });
 
-// Test database connection
-app.get('/api/testdb', (req, res) => {
-    db.query('SELECT * FROM grades', (err, results) => {
-        if (err) {
-            res.status(500).send('Database query failed');
-            return;
-        }
-        res.json(results);
+
+   const port = process.env.PORT || 3000;
+   server.listen(port, () => {
+     console.log(`Server is running on http://localhost:${port}`);
     });
-});
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
 });

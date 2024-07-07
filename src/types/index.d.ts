@@ -1,7 +1,9 @@
 declare type DashboardSummaryProps = {
   icon: IconType;
   title: string;
-  count: number;
+  //count: number;
+  apiEndpoint: string;
+
 };
 
 declare type CardHeaderProps = {

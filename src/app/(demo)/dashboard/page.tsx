@@ -43,7 +43,8 @@ export default function DashboardPage() {
               key={index}
               icon={summary.icon}
               title={summary.title}
-              count={summary.count}
+              apiEndpoint={summary.apiEndpoint}
+
             />
           ))}
         </div>
