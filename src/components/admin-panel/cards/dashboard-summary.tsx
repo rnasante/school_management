@@ -17,7 +17,7 @@ const DashboardSummary: React.FC<DashboardSummaryProps> = ({
       try {
         const response = await fetch(apiEndpoint);
         const data = await response.json();
-        setCount(data.count);  // Assume the API returns an object with a count property
+        setCount(data.studentCount);  // Assume the API returns an object with a count property
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }

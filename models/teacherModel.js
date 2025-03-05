@@ -1,9 +1,8 @@
 import { DataTypes } from 'sequelize';
-import sequelize  from '../config/database.js';
+import sequelize from '../config/database.js';
 
-
-const Student = sequelize.define('Student', {
-    student_id: {
+const Teacher = sequelize.define('Teacher', {
+    teacher_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
@@ -14,31 +13,32 @@ const Student = sequelize.define('Student', {
         allowNull: false
     },
     first_name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false
     },
     last_name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false
     },
     other_names: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: true
     },
-    form_level: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    date_of_birth: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    guardian_id: {
+    subject_id: {
         type: DataTypes.INTEGER,
         allowNull: true
     },
+    residential_address: {
+        type: DataTypes.STRING(225),
+        allowNull: false
+    },
+    teacher_contact_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    }
+}, {
+    tableName: 'Teachers',
+    timestamps: false
+});
 
-
-})
-
-export default Student; 
+export default Teacher;

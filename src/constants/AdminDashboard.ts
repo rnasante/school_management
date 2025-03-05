@@ -7,7 +7,7 @@ export const AdminSummaries = [
     //count: 15000,
     bgColor: "bg-[#d1f3e0]",
     iconColor: "text-[#3cb878]",
-    apiEndpoint: '/api/student/count'
+    apiEndpoint: '/api/student/studentCount'
   },
   {
     icon: Home,

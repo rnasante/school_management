@@ -1,6 +1,6 @@
 import express from 'express';
 import next from 'next';
-//const app = express();
+
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -8,10 +8,9 @@ const handle = app.getRequestHandler();
 
 import studentRoutes from './routes/studentRoutes.js';
 
+// Ensure `server` is declared here
 app.prepare().then(() => {
     const server = express(); 
-// Ensure `server` is declared here
-
 
 // Get all student routes
    server.use('/api',  studentRoutes);
