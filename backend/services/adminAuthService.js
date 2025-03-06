@@ -1,6 +1,9 @@
 import Admin from '../models/adminModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const loginAdmin = async (email, password) => {
     const admin = await Admin.findOne({ where: { email } });
@@ -11,7 +14,7 @@ export const loginAdmin = async (email, password) => {
 
     const token = jwt.sign(
         { id: admin.id, role: admin.role },
-        process.env.JWT_SECRET,
+        process.env.AUTH_SECRET,
         { expiresIn: '7d' }
     );
 

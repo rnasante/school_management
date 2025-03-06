@@ -8,9 +8,11 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 // const port = 3000;
-import authRoutes from './routes/superAdminAuthRoutes.js';
+import superAdminAuthRoutes from './routes/superAdminAuthRoutes.js';
+import adminAuthRoutes from './routes/adminAuthRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 import createAdminRoutes from './routes/createAdminRoutes.js';
+
 
 
 // Ensure `server` is declared here
@@ -21,8 +23,12 @@ app.prepare().then(() => {
     server.use(express.json());
 
   //Super Admin authentication route
-  server.use('/api/auth', authRoutes)
-  console.log('super admin routes loaded under /api');
+  server.use('/api/auth', superAdminAuthRoutes)
+  console.log('super admin auth routes loaded under /api');
+
+  //Admin authentication route
+  server.use('/api/auth', adminAuthRoutes)
+  console.log('admin auth routes loaded under /api');
 
   //create new admin route
   server.use('/api/admin', createAdminRoutes)
