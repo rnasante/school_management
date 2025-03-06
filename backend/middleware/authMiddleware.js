@@ -11,7 +11,7 @@ export const verifySuperAdmin = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET);
+        const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.AUTH_SECRET);
         
         if (decoded.role !== 'superadmin') {
             return res.status(403).json({ error: 'Unauthorized' });

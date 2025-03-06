@@ -10,6 +10,8 @@ const handle = app.getRequestHandler();
 // const port = 3000;
 import authRoutes from './routes/authRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
+import createAdminRoutes from './routes/createAdminRoutes.js';
+
 
 // Ensure `server` is declared here
 app.prepare().then(() => {
@@ -18,11 +20,15 @@ app.prepare().then(() => {
     // parse JSON request bodies
     server.use(express.json());
 
-//Super Admin authentication route
-server.use('/api/auth', authRoutes)
-console.log('super admin routes loaded under /api');
+  //Super Admin authentication route
+  server.use('/api/auth', authRoutes)
+  console.log('super admin routes loaded under /api');
 
-// Get all student routes
+  //create new admin route
+  server.use('/api/admin', createAdminRoutes)
+  console.log('add new admin route loaded under /api');
+
+  // Get all student routes
    server.use('/api',  studentRoutes);
    console.log('Student routes loaded under /api');
 
