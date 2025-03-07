@@ -1,13 +1,14 @@
 import { DataTypes } from 'sequelize';
 import sequelize  from '../config/database.js';
+import { generateModelID } from '../utilities/idGenerator.js';
 
 
 const Student = sequelize.define('Student', {
     student_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
+        unique: true,
+        primaryKey: true
     },
     school_id: {
         type: DataTypes.INTEGER,
@@ -36,9 +37,13 @@ const Student = sequelize.define('Student', {
     guardian_id: {
         type: DataTypes.INTEGER,
         allowNull: true
-    },
+    }
 
+});
 
+// Hook to generate Student ID before record creation
+Student.beforeCreate(async (student) => {
+    student.student_id = generateModelID('STU');
 })
 
 export default Student; 

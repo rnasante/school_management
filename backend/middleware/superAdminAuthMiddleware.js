@@ -18,6 +18,9 @@ export const verifySuperAdmin = (req, res, next) => {
         }
 
         req.superAdmin = decoded;
+
+        console.log("Middleware passed, proceeding to create admin");
+        
         next();
     } catch (error) {
         res.status(401).json({ error: 'Invalid token' });

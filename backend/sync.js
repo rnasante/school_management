@@ -1,6 +1,7 @@
 import sequelize from './config/database.js';
-import './models/associations.js'; 
-import {createSuperAdmin} from './createSuperAdmin.js'
+import {Admin, Teacher, Student, Subject} from './models/associations.js'; 
+import {createSuperAdmin} from './createSuperAdmin.js';
+
 
 const syncModels = async () => {
   try {

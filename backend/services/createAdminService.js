@@ -1,5 +1,6 @@
 import Admin from '../models/adminModel.js';
 import bcrypt from 'bcrypt';
+import { generateModelID } from '../utilities/idGenerator.js';
 
 export const createAdmin = async (adminData) => {
     const { first_name, last_name, email, password } = adminData;
@@ -9,13 +10,19 @@ export const createAdmin = async (adminData) => {
     if (existingAdmin) throw new Error('Admin already exists');
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    console.log("Creating admin with data:", adminData);
+
     const newAdmin = await Admin.create({
+        admin_id: generateModelID('ADM'),
         first_name,
         last_name,
         email,
         password: hashedPassword,
         role: 'admin'
-    });
+    }, { hooks: true });
+
+    console.log("Admin successfully created:", newAdmin);
 
     return newAdmin;
 };
