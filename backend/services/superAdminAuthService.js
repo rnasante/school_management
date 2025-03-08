@@ -20,7 +20,7 @@ export const loginSuperAdmin = async (email, password) => {
         }
 
         const token = jwt.sign(
-            { id: superAdmin.admin_id, role: superAdmin.role },
+            { id: superAdmin.admin_id, email: superAdmin.email, role: superAdmin.role },
             process.env.AUTH_SECRET,
             { expiresIn: '1h' }
         );

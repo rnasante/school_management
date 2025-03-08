@@ -19,7 +19,10 @@ export const verifySuperAdmin = (req, res, next) => {
 
         req.superAdmin = decoded;
 
-        console.log("Middleware passed, proceeding to create admin");
+        console.log('Decoded token:', decoded);
+        console.log("Superadmin access granted");
+
+
         
         next();
     } catch (error) {

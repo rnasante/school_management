@@ -12,6 +12,7 @@ import superAdminAuthRoutes from './routes/superAdminAuthRoutes.js';
 import adminAuthRoutes from './routes/adminAuthRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 import createAdminRoutes from './routes/createAdminRoutes.js';
+import addSubjectRoutes from './routes/addSubjectRoutes.js';
 
 
 
@@ -33,6 +34,10 @@ app.prepare().then(() => {
     //create new admin route
     server.use('/api/admin', createAdminRoutes)
     console.log('add new admin route loaded under /api');
+
+    //create new subject route
+    server.use('/api/subject', addSubjectRoutes)
+    console.log('add new subject route loaded under /api');
 
     // Get all student routes
     server.use('/api',  studentRoutes);

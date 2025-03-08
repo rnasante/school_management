@@ -13,7 +13,7 @@ export const loginAdmin = async (email, password) => {
     if (!isMatch) throw new Error('Invalid password');
 
     const token = jwt.sign(
-        { id: admin.id, role: admin.role },
+        { id: admin.admin_id, role: admin.role },
         process.env.AUTH_SECRET,
         { expiresIn: '7d' }
     );

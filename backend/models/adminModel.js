@@ -37,7 +37,7 @@ const Admin = sequelize.define('Admin', {
 });
 
 // Hook to generate Admin ID before record creation
-console.log("Admin model loaded!");
+
 Admin.beforeCreate((admin) => {
     console.log("BeforeCreate hook triggered");
     if (!admin.admin_id) {

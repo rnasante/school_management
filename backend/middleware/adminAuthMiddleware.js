@@ -11,7 +11,11 @@ export const authenticateAdmin = async (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.AUTH_SECRET);
         req.admin = await Admin.findByPk(decoded.id);
-        if (!req.admin) return res.status(404).json({ error: 'Admin not found' });
+        const admin = req.admin;
+        if (!admin) return res.status(404).json({ error: 'Admin not found' });
+
+        console.log('Decoded token:', admin);
+        console.log("Superadmin access granted");
 
         next();
     } catch (error) {

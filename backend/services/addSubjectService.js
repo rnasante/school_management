@@ -1,4 +1,5 @@
 import Subject from '../models/subjectModel.js';
+import { generateModelID } from '../utilities/idGenerator.js';
 
 export const createSubject = async (subjectData) => {
     const{subject_name, subject_code, department_name} = subjectData;
@@ -8,7 +9,8 @@ export const createSubject = async (subjectData) => {
         throw new Error('Subject already exists');
     }
 
-    const newSubject = await subjectData.create({
+    const newSubject = await Subject.create({
+        subject_id: generateModelID('SUB'),
         subject_name,
         subject_code,
         department_name
@@ -16,3 +18,4 @@ export const createSubject = async (subjectData) => {
 
     return newSubject;
 };
+
