@@ -1,4 +1,4 @@
-import { createAdmin } from '../services/createAdminService.js';
+import { createAdmin } from '../services/addAdminService.js';
 
 export const addAdmin = async (req, res) => {
     try {

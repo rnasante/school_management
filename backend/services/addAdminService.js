@@ -22,7 +22,9 @@ export const createAdmin = async (adminData) => {
         role: 'admin'
     }, { hooks: true });
 
-    console.log("Admin successfully created:", newAdmin);
+    const safeAdmin = newAdmin;
 
-    return newAdmin;
+    console.log("Admin successfully created:", {password, ...safeAdmin});
+
+    return {password, ...safeAdmin};
 };

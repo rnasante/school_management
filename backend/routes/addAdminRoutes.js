@@ -1,5 +1,5 @@
 import express from 'express';
-import { addAdmin } from '../controllers/createAdminController.js';
+import { addAdmin } from '../controllers/addAdminController.js';
 import { verifySuperAdmin } from '../middleware/superAdminAuthMiddleware.js';
 
 const router = express.Router();

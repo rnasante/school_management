@@ -18,5 +18,6 @@ export const loginAdmin = async (email, password) => {
         { expiresIn: '7d' }
     );
 
+
     return { token, admin };
 };

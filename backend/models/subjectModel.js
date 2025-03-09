@@ -24,7 +24,7 @@ const Subject = sequelize.define('Subject', {
         type: DataTypes.INTEGER,
         allowNull: true
     },
-    department_name: {
+    department_id: {
         type: DataTypes.STRING,
         allowNull: true
     }

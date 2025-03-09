@@ -3,8 +3,8 @@ import { createSubject } from '../services/addSubjectService.js';
 export const addSubject = async (req, res) => {
     try {
         const subject = req.body;
-        const newsubject = await createSubject(subject);
-        res.status(201).json({ message: 'Subject added successfully', newsubject });
+        const newSubject = await createSubject(subject);
+        res.status(201).json({ message: 'Subject added successfully', newSubject });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

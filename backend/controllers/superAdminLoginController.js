@@ -1,4 +1,4 @@
-import { loginSuperAdmin } from '../services/superAdminAuthService.js';
+import { loginSuperAdmin } from '../services/superAdminLoginService.js';
 
 export const superAdminLogin = async (req, res) => {
     try {
