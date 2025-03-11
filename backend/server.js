@@ -14,6 +14,7 @@ import studentRoutes from './routes/studentRoutes.js';
 import addAdminRoutes from './routes/addAdminRoutes.js';
 import addSubjectRoutes from './routes/addSubjectRoutes.js';
 import addTeacherRoutes from './routes/addTeacherRoutes.js';
+import addClassRoutes from './routes/addClassRoutes.js';
 
 
 
@@ -43,6 +44,10 @@ app.prepare().then(() => {
     //create new subject route
     server.use('/api/subject', addSubjectRoutes)
     console.log('add new subject route loaded under /api');
+
+    //create new class related routes
+    server.use('/api',  addClassRoutes);
+    console.log('Class related routes loaded under /api');
 
     // Get all student routes
     server.use('/api',  studentRoutes);

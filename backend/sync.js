@@ -6,7 +6,7 @@ import {createSuperAdmin} from './createSuperAdmin.js';
 
 const syncModels = async () => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     console.log('All models were synchronized successfully.');
     
     // Call createSuperAdmin AFTER syncing models
