@@ -11,8 +11,8 @@ const Student = sequelize.define('Student', {
         primaryKey: true
     },
     school_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: DataTypes.STRING,
+        allowNull: true
     },
     first_name: {
         type: DataTypes.STRING,
@@ -26,10 +26,46 @@ const Student = sequelize.define('Student', {
         type: DataTypes.STRING,
         allowNull: true
     },
-    form_level: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
+    // schoollevel_id: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false,
+    //     references: { 
+    //         model: 'SchoolLevel',  // ✅ Corrected
+    //         key: 'schoollevel_id' 
+    //     },
+    //     onUpdate: 'CASCADE',
+    //     onDelete: 'SET NULL'
+    // },
+    // year_id: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false,
+    //     references: { 
+    //         model: 'Year',  // ✅ Corrected
+    //         key: 'year_id' 
+    //     },
+    //     onUpdate: 'CASCADE',
+    //     onDelete: 'SET NULL'
+    // },
+    // class_id: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false,
+    //     references: { 
+    //         model: 'Class',  // ✅ Corrected
+    //         key: 'class_id' 
+    //     },
+    //     onUpdate: 'CASCADE',
+    //     onDelete: 'SET NULL'
+    // },
+    // section_id: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false,
+    //     references: { 
+    //         model: 'Section',  // ✅ Corrected
+    //         key: 'section_id' 
+    //     },
+    //     onUpdate: 'CASCADE',
+    //     onDelete: 'SET NULL'
+    // },
     date_of_birth: {
         type: DataTypes.DATE,
         allowNull: false
@@ -38,12 +74,11 @@ const Student = sequelize.define('Student', {
         type: DataTypes.INTEGER,
         allowNull: true
     }
-
 });
 
 // Hook to generate Student ID before record creation
 Student.beforeCreate(async (student) => {
     student.student_id = generateModelID('STU');
-})
+});
 
-export default Student; 
+export default Student;
