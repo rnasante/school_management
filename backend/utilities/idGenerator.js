@@ -3,4 +3,14 @@ export const generateModelID = (modelName) => {
     return `${modelName.toUpperCase()}${randomPart}`;
 };
 
-// console.log(generateModelID('ADM'));
+export const generateModelID5 = (modelName) => {
+    const randomPart = Math.floor(100 + Math.random() * 900 ); //ensures a 3-digit number
+    return `${modelName.toUpperCase()}${randomPart}`;
+};
+
+export const generateModelIdSchLvl = (modelName) => {
+ 
+    return modelName.toUpperCase();
+};
+
+// console.log(generateModelIdSchLvl('cls'));

@@ -1,0 +1,1 @@
+import Class from "../models/classModel.js";
