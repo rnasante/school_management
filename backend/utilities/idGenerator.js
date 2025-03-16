@@ -13,4 +13,4 @@ export const generateModelIdSchLvl = (modelName) => {
     return modelName.toUpperCase();
 };
 
-// console.log(generateModelIdSchLvl('cls'));
+console.log(generateModelID('cls'));

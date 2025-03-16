@@ -1,4 +1,5 @@
-import Admin from './adminModel.js';
+import User from './userModel.js';
+// import Admin from './adminModel.js';
 import Teacher from './teacherModel.js';
 import Subject from './subjectModel.js';
 import SchoolLevel from './schoolLevelModel.js';
@@ -17,9 +18,13 @@ import Student from './studentModel.js';
 //State the relationship between database tables models here
 const defineAssociation = () => { 
 
-    // Admin - Teacher Relationship
-Admin.hasMany(Teacher, { foreignKey: 'admin_id' });
-Teacher.belongsTo(Admin, { foreignKey: 'admin_id' });
+// user - teacher  relationship
+User.hasMany(Teacher, {foreignKey: 'user_id'});
+Teacher.belongsTo(User, {foreignKey: 'user_id'})
+
+// Admin - Teacher Relationship
+// Admin.hasMany(Teacher, { foreignKey: 'admin_id' });
+// Teacher.belongsTo(Admin, { foreignKey: 'admin_id' });
 
 // Many-to-Many: Student - Subject
 Student.belongsToMany(Subject, { through: 'StudentSubjects' });
@@ -103,4 +108,4 @@ Student.belongsTo(Year, { foreignKey: 'year_id' });
 defineAssociation();
 
 
-export  {Student, Teacher, Admin, Subject, Program, Section, Year, SchoolLevel};
+export  {Student, Teacher, User, Subject, Program, Section, Year, SchoolLevel};

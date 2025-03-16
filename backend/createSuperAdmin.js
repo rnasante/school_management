@@ -1,15 +1,16 @@
-import Admin from './models/adminModel.js';
+import User from './models/userModel.js';
 import bcrypt from 'bcrypt';
 import { generateModelID } from './utilities/idGenerator.js';
 
 export const createSuperAdmin = async () => {
     try {
-        const existingSuperAdmin = await Admin.findOne({ where: { role: 'superadmin' } });
+        const existingSuperAdmin = await User.findOne({ where: { role: 'superadmin' } });
 
         if (!existingSuperAdmin) {
             const hashedPassword = await bcrypt.hash('SuperSecurePassword123', 10);
-            await Admin.create({
-                admin_id: generateModelID('SUP'),
+
+            await User.create({
+                user_id: generateModelID('SUP'),
                 first_name: 'Super',
                 last_name: 'Admin',
                 email: 'superadmin@example.com',

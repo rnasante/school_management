@@ -9,9 +9,10 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 // const port = 3000;
 import superAdminLoginRoutes from './routes/superAdminLoginRoutes.js';
-import adminLoginRoutes from './routes/adminLoginRoutes.js';
+import addUserRoutes from './routes/addUserRoutes.js';
+import userLoginRoutes from './routes/userLoginRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
-import addAdminRoutes from './routes/addAdminRoutes.js';
+// import addAdminRoutes from './routes/addAdminRoutes.js';
 import addSubjectRoutes from './routes/addSubjectRoutes.js';
 import addTeacherRoutes from './routes/addTeacherRoutes.js';
 import addClassRoutes from './routes/addClassRoutes.js';
@@ -25,17 +26,15 @@ app.prepare().then(() => {
     // parse JSON request bodies
     server.use(express.json());
 
+    //user related routes
+    server.use('/api', userLoginRoutes)
+    server.use('/api', addUserRoutes);
+    console.log('user related routes loaded under /api');
+
+
     //Super Admin authentication route
-    server.use('/api/auth', superAdminLoginRoutes)
+    server.use('/api/auth', superAdminLoginRoutes);
     console.log('super admin auth routes loaded under /api');
-
-    //Admin authentication route
-    server.use('/api/auth', adminLoginRoutes)
-    console.log('admin auth routes loaded under /api');
-
-    //create new admin route
-    server.use('/api/admin', addAdminRoutes)
-    console.log('add new admin route loaded under /api');
 
     //create new teacher route
     server.use('/api/teacher', addTeacherRoutes)
