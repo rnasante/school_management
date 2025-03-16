@@ -48,11 +48,11 @@ const Teacher = sequelize.define('Teacher', {
         type: DataTypes.INTEGER,
         allowNull: true
     },
-    admin_id: {  // Foreign key column
+    user_id: {  // Foreign key column
         type: DataTypes.STRING,
         allowNull: true, // A teacher might not be linked to an admin
         references: { 
-            key: 'admin_id' // Points to admin_id in Admin table
+            key: 'user_id' // Points to admin_id in Admin table
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL' // If admin is deleted, set admin_id to NULL

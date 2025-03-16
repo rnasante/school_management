@@ -1,4 +1,4 @@
-import Admin from '../models/adminModel.js';
+import User from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -8,7 +8,7 @@ dotenv.config();
 // Super Admin Login Service
 export const loginSuperAdmin = async (email, password) => {
     try {
-        const superAdmin = await Admin.findOne({ where: { email, role: 'superadmin' } });
+        const superAdmin = await User.findOne({ where: { email, role: 'superadmin' } });
 
         if (!superAdmin) {
             throw new Error('Super Admin not found');
@@ -20,7 +20,7 @@ export const loginSuperAdmin = async (email, password) => {
         }
 
         const token = jwt.sign(
-            { id: superAdmin.admin_id, email: superAdmin.email, role: superAdmin.role },
+            { id: superAdmin.user_id, email: superAdmin.email, role: superAdmin.role },
             process.env.AUTH_SECRET,
             { expiresIn: '1h' }
         );
