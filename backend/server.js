@@ -1,65 +1,82 @@
 import express from 'express';
-import next from 'next';
-// import dotenv from 'dotenv';
-
-// dotenv.config();
-
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
-// const port = 3000;
+import redisClient from './config/redis.js';
+import passwordResetRoutes from './routes/passwordResetRoutes.js';
+import passport from './config/passport.js';
 import superAdminLoginRoutes from './routes/superAdminLoginRoutes.js';
 import addUserRoutes from './routes/addUserRoutes.js';
 import userLoginRoutes from './routes/userLoginRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
-// import addAdminRoutes from './routes/addAdminRoutes.js';
 import addSubjectRoutes from './routes/addSubjectRoutes.js';
-import addTeacherRoutes from './routes/addTeacherRoutes.js';
 import addClassRoutes from './routes/addClassRoutes.js';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
+console.log('Starting API server initialization...');
 
-// Ensure `server` is declared here
-app.prepare().then(() => {
-    const server = express(); 
+// Create Express server
+const server = express();
 
-    // parse JSON request bodies
-    server.use(express.json());
+// Initialize server
+async function startServer() {
+    try {
+        // Enable CORS for frontend
+        server.use(cors({
+            origin: 'http://localhost:3000', // Your Next.js frontend URL
+            credentials: true
+        }));
+        console.log('CORS middleware initialized');
 
-    //user related routes
-    server.use('/api', userLoginRoutes)
-    server.use('/api', addUserRoutes);
-    console.log('user related routes loaded under /api');
+        // Connect to Redis if not already connected
+        console.log('Connecting to Redis...');
+        if (!redisClient.isOpen) {
+            await redisClient.connect();
+            console.log('Connected to Redis successfully');
+        }
 
+        // parse JSON request bodies
+        server.use(express.json());
+        console.log('JSON middleware initialized');
 
-    //Super Admin authentication route
-    server.use('/api/auth', superAdminLoginRoutes);
-    console.log('super admin auth routes loaded under /api');
+        // Initialize Passport middleware - must be before any routes that use it
+        server.use(passport.initialize());
+        console.log('Passport middleware initialized');
 
-    //create new teacher route
-    server.use('/api/teacher', addTeacherRoutes)
-    console.log('add new teacher route loaded under /api')
+        //user related routes
+        server.use('/api', userLoginRoutes);
+        server.use('/api', addUserRoutes);
+        console.log('User related routes loaded under /api');
 
-    //create new subject route
-    server.use('/api/subject', addSubjectRoutes)
-    console.log('add new subject route loaded under /api');
+        //Super Admin authentication route
+        server.use('/api/auth', superAdminLoginRoutes);
+        console.log('Super admin auth routes loaded under /api');
 
-    //create new class related routes
-    server.use('/api',  addClassRoutes);
-    console.log('Class related routes loaded under /api');
+        //create new subject route
+        server.use('/api/subject', addSubjectRoutes);
+        console.log('Subject routes loaded under /api');
 
-    // Get all student routes
-    server.use('/api',  studentRoutes);
-    console.log('Student routes loaded under /api');
+        //create new class related routes
+        server.use('/api', addClassRoutes);
+        console.log('Class related routes loaded under /api');
 
-    // Handling Next.js pages
-    server.get('*', (req, res) => {
-      return handle(req, res);
-    });
+        // Get all student routes
+        server.use('/api', studentRoutes);
+        console.log('Student routes loaded under /api');
 
+        // Password reset routes
+        server.use('/api/password-reset', passwordResetRoutes);
+        console.log('Password reset routes loaded under /api/password-reset');
 
-    const port = process.env.PORT || 3000;
-    server.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`);
-      });
-});
+        const port = process.env.API_PORT || 5000; // Changed to 5000 to avoid conflict with Next.js
+        server.listen(port, () => {
+            console.log(`API Server is running on http://localhost:${port}`);
+        });
+    } catch (error) {
+        console.error('Failed to start server:', error);
+        process.exit(1);
+    }
+}
+
+// Start the server
+startServer();

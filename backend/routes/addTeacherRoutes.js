@@ -1,8 +1,8 @@
-import express from 'express';
-import { addTeacher } from "../controllers/addTeacherController.js";
+// import express from 'express';
+// import { addTeacher } from "../controllers/addTeacherController.js";
 
-const router = express.Router();
+// const router = express.Router();
 
-router.post('/add', addTeacher);
+// router.post('/add', addTeacher);
 
-export default router;
+// export default router;

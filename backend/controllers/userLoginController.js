@@ -13,6 +13,6 @@ export const userLogin = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(401).json({ error: error.message });
+        res.status(401).json({ error: error.message || 'Authentication failed' });
     }
 };
