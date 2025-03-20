@@ -1,33 +1,33 @@
-import {createTeacher} from '../services/addTeacherService.js';
-import { tempPassResetEmail } from '../utilities/sendPassResetEmail.js';
+// import {createTeacher} from '../services/addTeacherService.js';
+// import { tempPassResetEmail } from '../utilities/sendPassResetEmail.js';
 
-export const addTeacher = async (req, res) => {
-    try{
-        const teacher = req.body;
-        const newTeacher = await createTeacher(teacher);
-        console.log("New Teacher Data:", newTeacher);
+// export const addTeacher = async (req, res) => {
+//     try{
+//         const teacher = req.body;
+//         const newTeacher = await createTeacher(teacher);
+//         console.log("New Teacher Data:", newTeacher);
 
-        // const { newTeacheremail, tempPassword: generatedTempPass } = newTeacher;
-        console.log("Sending email to:", newTeacher.email);
+//         // const { newTeacheremail, tempPassword: generatedTempPass } = newTeacher;
+//         console.log("Sending email to:", newTeacher.email);
         
-        if (!newTeacher.email) {
-            throw new Error("Teacher email is missing");
-        }
+//         if (!newTeacher.email) {
+//             throw new Error("Teacher email is missing");
+//         }
 
-        // console.log("Sending email to:", newTeacher.email);
-        // if (!newTeacher.email) {
-        //     throw new Error("Teacher email is missing");
-        // }
-
-
-        await tempPassResetEmail(newTeacher.email, newTeacher.tempPassword);
+//         // console.log("Sending email to:", newTeacher.email);
+//         // if (!newTeacher.email) {
+//         //     throw new Error("Teacher email is missing");
+//         // }
 
 
-        // Filter out sensitive data (both password and tempPassword) from the response
-        const { password, ...safeTeacher } = newTeacher;
+//         await tempPassResetEmail(newTeacher.email, newTeacher.tempPassword);
 
-        res.status(201).json({ message: 'Teacher added successfully', newTeacher: safeTeacher })
-    } catch(error){
-        res.status(400).json({ error: error.message });
-    }
-}
+
+//         // Filter out sensitive data (both password and tempPassword) from the response
+//         const { password, ...safeTeacher } = newTeacher;
+
+//         res.status(201).json({ message: 'Teacher added successfully', newTeacher: safeTeacher })
+//     } catch(error){
+//         res.status(400).json({ error: error.message });
+//     }
+// }

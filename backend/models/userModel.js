@@ -7,8 +7,13 @@ const User = sequelize.define('User', {
     last_name: { type: DataTypes.STRING, allowNull: false },
     other_names: { type: DataTypes.STRING, allowNull: true },
     email: { type: DataTypes.STRING, unique: true, allowNull: false },
+    phone_number: { type: DataTypes.STRING, unique: true, allowNull: true },
     password: { type: DataTypes.STRING, allowNull: false },
+    isTemporaryPassword: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+    },
     role: { type: DataTypes.ENUM('teacher', 'accountant', 'headteacher', 'superadmin'), allowNull: false },
-}, { timestamps: true });
+}, { timestamps: true, return: true });
 
 export default User;
