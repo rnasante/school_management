@@ -8,6 +8,7 @@ import userLoginRoutes from './routes/userLoginRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 import addSubjectRoutes from './routes/addSubjectRoutes.js';
 import addClassRoutes from './routes/addClassRoutes.js';
+// import studentRegistrationRoutes from './routes/studentRoutes.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
@@ -63,6 +64,10 @@ async function startServer() {
         // Get all student routes
         server.use('/api', studentRoutes);
         console.log('Student routes loaded under /api');
+
+        // Student registration routes
+        // server.use('/api', studentRegistrationRoutes);
+        // console.log('Student registration routes loaded under /api');
 
         // Password reset routes
         server.use('/api/password-reset', passwordResetRoutes);
