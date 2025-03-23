@@ -24,9 +24,10 @@ export const registerUser = async (userData) => {
             other_names,
             email, 
             phone_number,
-            password: hashedPassword, 
+            password: role === 'student' ? true : hashedPassword, 
             role,
-            isTemporaryPassword: true 
+            isTemporaryPassword: role === 'student' ? false : true,
+            status: role === 'student' ? 'pending' : 'active'
         }); 
 
          // Debugging

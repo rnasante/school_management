@@ -1,6 +1,6 @@
 // Define which roles can create which other roles
 const rolePermissions = {
-    superadmin: ['teacher', 'accountant', 'headteacher', 'superadmin'],
+    superadmin: ['teacher', 'accountant', 'headteacher', 'superadmin', 'student'],
     headteacher: ['teacher', 'accountant'],
     teacher: [], // Teachers cannot create other users
     accountant: [] // Accountants cannot create other users

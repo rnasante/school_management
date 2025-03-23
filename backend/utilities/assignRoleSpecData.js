@@ -1,9 +1,11 @@
 import Teacher from "../models/teacherModel.js";
+import Student from "../models/studentModel.js";
 import { generateModelID } from "./idGenerator.js";
 
 
 const roleModels = {
-    teacher:{model: Teacher, idField: "teacher_id", prefix: "TCH"}
+    teacher:{model: Teacher, idField: "teacher_id", prefix: "TCH"},
+    student:{model: Student, idField: "student_id", prefix: "STD"}
     // accountant: Accountant
 };
 
