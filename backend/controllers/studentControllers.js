@@ -1,19 +1,5 @@
 import {  getStudentById, updateStudent, deleteStudent } from '../services/studentServices.js';
 
-// export const addStudent = async (req, res) => {
-//   try {
-//     const result = await registerStudent(req.body);
-//     res.status(201).json({message: 'Student registered successfully', data: result});
-
-//   } catch (error) {
-//     console.error('Error in addStudent controller:', error);
-//     res.status(500).json({
-//       success: false,
-//       message: 'Error registering student',
-//       error: error.message
-//     });
-//   }
-// };
 
 export const getStudent = async (req, res) => {
   try {

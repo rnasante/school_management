@@ -3,50 +3,14 @@ import User from '../models/userModel.js';
 import Student from '../models/studentModel.js';
 
 
-// export const registerStudent = async (studentData) => {
-
-//   const { student_id, first_name, last_name, other_names, email, role } = studentData;
-  
-//   const existingStudent = await Student.findOne({ where: { student_id} });
-//   if (existingStudent) {
-//     throw new Error('Student with this student ID already exists');
-//   }
-
-//   // Check if user already exists
-//   const existingUser = await User.findOne({ where: { email: studentData.email } });
-//   if (existingUser) {
-//     throw new Error('User with this email already exists');
-//   }
-
-  
-
-//   const user = await User.create({
-//     id: generateModelID('USR'),
-//     first_name,
-//     last_name,
-//     other_names,
-//     role: 'student',
-//     email,
-//     status: 'pending' // Students can't log in yet
-//   });
-
-//   const student = await Student.create({
-//     ...studentData,
-//     user_id: user.user_id,
-//     student_id: generateModelID('STD'),
-//     admission_date: new Date()
-//   });
-
-//   return { student, user };
-// };
-
 export const getStudentById = async (student_id) => {
-  const student = await Student.findByPk(student_id, {
-    include: [{
-      model: User,
-      attributes: [ 'email', 'phone_number', 'status']
-    }]
-  });
+  const student = await Student.findByPk(student_id
+    // include: [{
+    //   model: User,
+    //   as: 'user',
+    //   attributes: [ 'first_name']
+    // }]
+  );
   if (!student) throw new Error('Student not found');
   return student;
 };
@@ -54,12 +18,45 @@ export const getStudentById = async (student_id) => {
 export const updateStudent = async (student_id, updateData) => {
   const student = await Student.findByPk(student_id);
   if (!student) throw new Error('Student not found');
+
+  // Get the list of fields (attributes) for each model
+  const studentAttrs = Object.keys(Student.getAttributes);
+  const userAttrs = Object.keys(User.getAttributes);
+
+  // Separate the update data for each model
+  const studentUpdateData = {};
+  const userUpdateData = {};
+
+  // For each key in updateData, if it exists in the respective model, add it.
+  for (const key in updateData) {
+    if (studentAttrs.includes(key)) {
+      studentUpdateData[key] = updateData[key];
+    }
+    if (userAttrs.includes(key)) {
+      userUpdateData[key] = updateData[key];
+    }
+  }
+
+  // Update the Student record with its own fields
+  await student.update(studentUpdateData);
+
+  // If there's data for the User model, update the associated User record
+  if (Object.keys(userUpdateData).length > 0) {
+    const user = await User.findOne({ where: { user_id: student.user_id } });
+    if (user) {
+      await user.update(userUpdateData);
+    }
+  }
+
   await student.update(updateData);
   return student;
 };
 
 export const deleteStudent = async (student_id) => {
+
   const student = await Student.findByPk(student_id);
+
   if (!student) throw new Error('Student not found');
+  
   await student.update({ status: 'inactive' });
 };

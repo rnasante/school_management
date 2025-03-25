@@ -22,9 +22,9 @@ const defineAssociation = () => {
 User.hasMany(Teacher, {foreignKey: 'user_id'});
 Teacher.belongsTo(User, {foreignKey: 'user_id'})
 
-// Admin - Teacher Relationship
-// Admin.hasMany(Teacher, { foreignKey: 'admin_id' });
-// Teacher.belongsTo(Admin, { foreignKey: 'admin_id' });
+// user - student  relationship
+User.hasOne(Student, {foreignKey: 'user_id', as: 'student'});
+Student.belongsTo(User, {foreignKey: 'user_id', as: 'user'})
 
 // Many-to-Many: Student - Subject
 Student.belongsToMany(Subject, { through: 'StudentSubjects' });

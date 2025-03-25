@@ -24,6 +24,10 @@ const Student = sequelize.define('Student', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  other_names: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   date_of_birth: {
     type: DataTypes.DATEONLY,
     allowNull: true
