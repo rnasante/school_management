@@ -19,34 +19,34 @@ export const updateStudent = async (student_id, updateData) => {
   const student = await Student.findByPk(student_id);
   if (!student) throw new Error('Student not found');
 
-  // Get the list of fields (attributes) for each model
-  const studentAttrs = Object.keys(Student.getAttributes);
-  const userAttrs = Object.keys(User.getAttributes);
+  // // Get the list of fields (attributes) for each model
+  // const studentAttrs = Object.keys(Student.getAttributes);
+  // const userAttrs = Object.keys(User.getAttributes);
 
-  // Separate the update data for each model
-  const studentUpdateData = {};
-  const userUpdateData = {};
+  // // Separate the update data for each model
+  // const studentUpdateData = {};
+  // const userUpdateData = {};
 
-  // For each key in updateData, if it exists in the respective model, add it.
-  for (const key in updateData) {
-    if (studentAttrs.includes(key)) {
-      studentUpdateData[key] = updateData[key];
-    }
-    if (userAttrs.includes(key)) {
-      userUpdateData[key] = updateData[key];
-    }
-  }
+  // // For each key in updateData, if it exists in the respective model, add it.
+  // for (const key in updateData) {
+  //   if (studentAttrs.includes(key)) {
+  //     studentUpdateData[key] = updateData[key];
+  //   }
+  //   if (userAttrs.includes(key)) {
+  //     userUpdateData[key] = updateData[key];
+  //   }
+  // }
 
-  // Update the Student record with its own fields
-  await student.update(studentUpdateData);
+  // // Update the Student record with its own fields
+  // await student.update(studentUpdateData);
 
-  // If there's data for the User model, update the associated User record
-  if (Object.keys(userUpdateData).length > 0) {
-    const user = await User.findOne({ where: { user_id: student.user_id } });
-    if (user) {
-      await user.update(userUpdateData);
-    }
-  }
+  // // If there's data for the User model, update the associated User record
+  // if (Object.keys(userUpdateData).length > 0) {
+  //   const user = await User.findOne({ where: { user_id: student.user_id } });
+  //   if (user) {
+  //     await user.update(userUpdateData);
+  //   }
+  // }
 
   await student.update(updateData);
   return student;

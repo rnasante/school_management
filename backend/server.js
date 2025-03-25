@@ -5,6 +5,7 @@ import passport from './config/passport.js';
 import superAdminLoginRoutes from './routes/superAdminLoginRoutes.js';
 import addUserRoutes from './routes/addUserRoutes.js';
 import userLoginRoutes from './routes/userLoginRoutes.js';
+import teacherRoutes from './routes/teacherRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 import addSubjectRoutes from './routes/addSubjectRoutes.js';
 import addClassRoutes from './routes/addClassRoutes.js';
@@ -48,6 +49,10 @@ async function startServer() {
         server.use('/api', userLoginRoutes);
         server.use('/api', addUserRoutes);
         console.log('User related routes loaded under /api');
+
+        //teacher related routes
+        server.use('/api', teacherRoutes );
+        console.log('Teacher  routes loaded under /api');
 
         //Super Admin authentication route
         server.use('/api/auth', superAdminLoginRoutes);
