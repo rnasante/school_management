@@ -1,8 +1,10 @@
 import sequelize from './config/database.js';
-// import {Admin, Teacher, Student, Subject, Class, Section, Year, SchoolLevel} from './models/associations.js'; 
+import {Student, User} from './models/associations.js'
 import './models/associations.js'
 import {createSuperAdmin} from './createSuperAdmin.js';
 
+console.log("Student associations:", Student.associations);
+console.log("User associations:", User.associations);
 
 const syncModels = async () => {
   try {
