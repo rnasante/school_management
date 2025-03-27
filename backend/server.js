@@ -9,6 +9,7 @@ import teacherRoutes from './routes/teacherRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 import addSubjectRoutes from './routes/addSubjectRoutes.js';
 import addClassRoutes from './routes/addClassRoutes.js';
+import classScheduleRoute from './routes/classScheduleRoute.js'
 // import studentRegistrationRoutes from './routes/studentRoutes.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -69,6 +70,10 @@ async function startServer() {
         // Get all student routes
         server.use('/api', studentRoutes);
         console.log('Student routes loaded under /api');
+
+        //create class schedule route
+        server.use('/api', classScheduleRoute);
+        console.log('class schedule route loaded under /api');
 
         // Student registration routes
         // server.use('/api', studentRegistrationRoutes);
