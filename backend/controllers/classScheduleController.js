@@ -1,5 +1,6 @@
 import { error } from 'console';
-import { createClassSchedule, getClassScheduleById, getClassSchedules, updateClassSchedule, deleteClassSchedule } from '../services/classScheduleService.js';
+import { createClassSchedule, getClassScheduleById, getClassSchedules, 
+    updateClassSchedule, deleteClassSchedule, getGroupedClassSchedules } from '../services/classScheduleService.js';
 
 export const createSchedule = async (req, res) => {
   try {
@@ -102,3 +103,28 @@ export const removeClassSchedule = async (req, res) => {
         });
     }
 }
+
+
+export const getGroupedSchedules = async (req, res) => {
+  try {
+    // Use query parameter ?groupBy=class or ?groupBy=teacher; default is 'class'
+    const groupBy = req.query.groupBy || 'class';
+
+    const groupedSchedules = await getGroupedClassSchedules(groupBy);
+
+    res.status(200).json({
+      success: true,
+      message: 'Grouped schedules fetched successfully',
+      data: groupedSchedules
+    });
+    
+  } catch (error) {
+    console.error('Error fetching grouped schedules:', error);
+
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching grouped schedules',
+      error: error.message
+    });
+  }
+};
