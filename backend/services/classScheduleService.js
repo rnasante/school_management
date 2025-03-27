@@ -1,4 +1,5 @@
-import { Op } from 'sequelize';
+import sequelize from '../config/database.js';
+import { Op, QueryTypes } from 'sequelize';
 import Class from '../models/classModel.js';
 import ClassSchedule from '../models/classScheduleModel.js';
 import Subject from '../models/subjectModel.js';
@@ -160,4 +161,58 @@ export const deleteClassSchedule = async (schedule_id) => {
     await schedule.destroy();
 
     return { message: 'Class schedule deleted successfully' };
+};
+
+
+// get class schedule goruped by class or teacher
+export const getGroupedClassSchedules = async (groupBy = 'class') => {
+    // Fetch all schedules with the related data
+    // const schedules = await ClassSchedule.findAll();
+
+    // Example raw query joining ClassSchedule and Teacher tables.
+    const classGrpQuery = `
+    SELECT cs.*, c.class_name
+    FROM ClassSchedules cs
+    LEFT JOIN Classes c ON c.class_id = cs.class_id
+    `;
+    const classSchedule = await sequelize.query(classGrpQuery, { type: QueryTypes.SELECT });
+
+    const teacherGrpQuery = `
+    SELECT cs.*, t.first_name, t.last_name
+    FROM ClassSchedules cs
+    LEFT JOIN Teachers t ON cs.teacher_id = t.teacher_id
+    `;
+    const teacherSchedule = await sequelize.query(teacherGrpQuery, { type: QueryTypes.SELECT });
+
+
+  
+    let grouped;
+  
+    if (groupBy === 'class') {
+      // Group schedules by class name
+      grouped = classSchedule.reduce((acc, schedule) => {
+        const key = schedule.class_name ? schedule.class_name : 'Unknown';
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(schedule);
+        return acc;
+      }, {});
+    } else if (groupBy === 'teacher') {
+      // Group schedules by teacher full name
+      grouped = teacherSchedule.reduce((acc, schedule) => {
+        const teacherName = schedule.first_name && schedule.last_name
+          ? `${schedule.first_name} ${schedule.last_name}`
+          : 'Unknown';
+        if (!acc[teacherName]) {
+          acc[teacherName] = [];
+        }
+        acc[teacherName].push(schedule);
+        return acc;
+      }, {});
+    } else {
+      throw new Error("Invalid groupBy parameter. Use 'class' or 'teacher'.");
+    }
+  
+    return grouped;
 };
