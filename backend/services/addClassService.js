@@ -2,7 +2,6 @@ import Program from "../models/programModel.js";
 import Section from "../models/classSectionModel.js";
 import Year from "../models/classYearModel.js";
 import Class from "../models/classModel.js"
-
 import { generateModelID5 } from "../utilities/idGenerator.js";
 import { error } from "console";
 
@@ -64,15 +63,13 @@ export const createClass = async (classData) => {
 
     let actualClass;
 
-    if (program_name && section_name) {
-        actualClass = `${year_name}`;
-     } else if (program_name && !section_name) {
-        actualClass = `${program_name}${year_name}`;
+    if (program_name && !section_name) {
+        actualClass = `${program_name} ${year_name}`;
      } else if (!program_name && section_name) {
-        actualClass = `${year_name}${section_name}`;
+        actualClass = `${year_name} ${section_name}`;
      }  
     else {
-        actualClass = `${year_name}${program_name}${section_name}`;
+        actualClass = `${year_name} ${program_name} ${section_name}`;
      }
 
     const existingClass = await Class.findOne({where: {class_name: actualClass}});
