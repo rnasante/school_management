@@ -1,4 +1,5 @@
-import {  getStudentById, updateStudent, deleteStudent } from '../services/studentServices.js';
+import { response } from 'express';
+import {  getStudentById, getAllStudents, updateStudent, deleteStudent } from '../services/studentServices.js';
 
 
 export const getStudent = async (req, res) => {
@@ -15,6 +16,29 @@ export const getStudent = async (req, res) => {
     });
   }
 };
+
+export const allStudents = async (req, res) => {
+  try {
+    const students = await getAllStudents();
+
+    res.status(200).json({
+      success: true,
+      message: 'All student records fetched successfully!',
+      students
+    });
+
+  } catch(error) {
+    console.log('Error in allStudents controller: ', error);
+
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching all students\' details',
+      error: error.message
+    });
+  }
+}
+
+
 
 export const updateStudentDetails = async (req, res) => {
   try {
