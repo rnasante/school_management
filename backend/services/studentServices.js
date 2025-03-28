@@ -15,6 +15,14 @@ export const getStudentById = async (student_id) => {
   return student;
 };
 
+export const getAllStudents = async () => {
+   const allStudents = await Student.findAll();
+
+   if(!allStudents) throw new Error('Students not found');
+
+   return allStudents;
+}
+
 export const updateStudent = async (student_id, updateData) => {
   const student = await Student.findByPk(student_id);
   if (!student) throw new Error('Student not found');

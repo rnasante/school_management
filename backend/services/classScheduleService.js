@@ -167,9 +167,8 @@ export const deleteClassSchedule = async (schedule_id) => {
 // get class schedule goruped by class or teacher
 export const getGroupedClassSchedules = async (groupBy = 'class') => {
     // Fetch all schedules with the related data
-    // const schedules = await ClassSchedule.findAll();
 
-    // Example raw query joining ClassSchedule and Teacher tables.
+    // raw query joining ClassSchedule and Teacher tables.
     const classGrpQuery = `
     SELECT cs.*, c.class_name
     FROM ClassSchedules cs

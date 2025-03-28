@@ -1,11 +1,11 @@
 import express from 'express';
-import { getStudent, updateStudentDetails, removeStudent } from '../controllers/studentControllers.js';
+import { allStudents, getStudent, updateStudentDetails, removeStudent } from '../controllers/studentControllers.js';
 // import { checkUserPermission } from '../middleware/checkUserPermission.js';
 
 const router = express.Router();
 
-// Register a new student
-// router.post('/student/register',  addStudent);
+// get all students
+router.get('/students',  allStudents);
 
 // Get student details by ID
 router.get('/student/:student_id',  getStudent);
