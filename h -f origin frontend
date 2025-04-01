@@ -1,0 +1,5 @@
+[33m9fde006e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfrontend[m[33m)[m new branch frontend
+[33ma38c80b2[m[33m ([m[1;32mmain[m[33m)[m changes to .gitignore
+[33m47034deb[m Remove node_modules from tracking and update .gitignore
+[33me5f4a822[m set up fronted directories
+[33m1695e7e3[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m tested endpoint to get class schedules grouped by class or teacher
