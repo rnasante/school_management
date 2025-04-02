@@ -1,5 +1,5 @@
 "use client"
-
+import Link from "next/link"
 import { useState } from "react"
 // import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 // import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -48,7 +48,9 @@ export function StudentsTable() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <Button>Add Student</Button>
+        <Link href="/students/add">
+          <Button>Add Student</Button>
+        </Link>
       </div>
 
       <div className="rounded-md border">
