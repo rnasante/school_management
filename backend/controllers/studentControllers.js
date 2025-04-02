@@ -45,7 +45,7 @@ export const totalStudentsCount = async (req, res) => {
     res.status(200).json({
       success: true,
       message: 'Total students count fetched successfully',
-      data: totalStudentsNumber
+      count: totalStudentsNumber
     });
   } catch (error) {
     console.error('Error in totalStudentsCount controller:', error);
