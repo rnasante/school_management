@@ -1,16 +1,29 @@
+"use client";
+
 import type React from "react"
-import { ArrowDown, ArrowUp, Users, UserCheck, BookOpen, Calendar, Award, ClipboardList } from "lucide-react"
+import { Users, UserCheck, BookOpen, Calendar, Award, ClipboardList } from "lucide-react"
+import { StatCard } from "./ui/stat-card"
 import { AttendanceChart } from "./attendance-chart"
+import { useDashboardData } from "../../hooks/useDashbordData"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 
 
 export function DashboardContent() {
+
+  const { totalStudents, loading } = useDashboardData();
+
   return (
     <div className="grid gap-6">
       <h1 className="text-3xl font-bold tracking-tight">School Dashboard</h1>
 
       <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="Total Students" value="1,234" description="Enrolled students" trend={5.2} icon={Users} />
+        <StatCard 
+          title="Total Students" 
+          value={loading ? "Loading..." : totalStudents?.toString() || "0"} 
+          description="Enrolled students" 
+          trend={5.2} 
+          icon={Users} 
+        />
         <StatCard title="Attendance Rate" value="94.5%" description="This week" trend={2.1} icon={UserCheck} />
         <StatCard title="Classes" value="48" description="Active classes" trend={0} icon={BookOpen} />
         <StatCard title="Upcoming Events" value="12" description="Next 30 days" trend={8.4} icon={Calendar} />
@@ -67,37 +80,37 @@ export function DashboardContent() {
   )
 }
 
-interface StatCardProps {
-  title: string
-  value: string
-  description: string
-  trend: number
-  icon: React.ElementType
-}
+// interface StatCardProps {
+//   title: string
+//   value: string
+//   description: string
+//   trend: number
+//   icon: React.ElementType
+// }
 
-function StatCard({ title, value, description, trend, icon: Icon }: StatCardProps) {
-  const isPositive = trend > 0
-  const isNeutral = trend === 0
+// function StatCard({ title, value, description, trend, icon: Icon }: StatCardProps) {
+//   const isPositive = trend > 0
+//   const isNeutral = trend === 0
 
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium">{title}</CardTitle>
-        <Icon className="h-4 w-4 text-muted-foreground" />
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-        <p className="text-xs text-muted-foreground">{description}</p>
-        {!isNeutral && (
-          <div className={`mt-1 flex items-center text-xs ${isPositive ? "text-green-500" : "text-red-500"}`}>
-            {isPositive ? <ArrowUp className="mr-1 h-3 w-3" /> : <ArrowDown className="mr-1 h-3 w-3" />}
-            <span>{Math.abs(trend)}%</span>
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  )
-}
+//   return (
+//     <Card>
+//       <CardHeader className="flex flex-row items-center justify-between pb-2">
+//         <CardTitle className="text-sm font-medium">{title}</CardTitle>
+//         <Icon className="h-4 w-4 text-muted-foreground" />
+//       </CardHeader>
+//       <CardContent>
+//         <div className="text-2xl font-bold">{value}</div>
+//         <p className="text-xs text-muted-foreground">{description}</p>
+//         {!isNeutral && (
+//           <div className={`mt-1 flex items-center text-xs ${isPositive ? "text-green-500" : "text-red-500"}`}>
+//             {isPositive ? <ArrowUp className="mr-1 h-3 w-3" /> : <ArrowDown className="mr-1 h-3 w-3" />}
+//             <span>{Math.abs(trend)}%</span>
+//           </div>
+//         )}
+//       </CardContent>
+//     </Card>
+//   )
+// }
 
 interface ActivityItemProps {
   icon: React.ElementType
