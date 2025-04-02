@@ -23,6 +23,14 @@ export const getAllStudents = async () => {
    return allStudents;
 }
 
+export const totalStudents = async () => {
+  const totalStudents = await Student.count();
+
+  if(!totalStudents) throw new Error('Total Students not found');
+  
+  return totalStudents;
+}
+
 export const updateStudent = async (student_id, updateData) => {
   const student = await Student.findByPk(student_id);
   if (!student) throw new Error('Student not found');
