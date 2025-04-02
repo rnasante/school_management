@@ -1,0 +1,18 @@
+[1mdiff --cc frontend/src/components/dashboard-content.tsx[m
+[1mindex d094a42f,6961afd8..00000000[m
+[1m--- a/frontend/src/components/dashboard-content.tsx[m
+[1m+++ b/frontend/src/components/dashboard-content.tsx[m
+[36m@@@ -1,6 -1,10 +1,8 @@@[m
+[31m -"use client";[m
+[31m -[m
+  import type React from "react"[m
+[31m- import { ArrowDown, ArrowUp, Users, UserCheck, BookOpen, Calendar, Award, ClipboardList } from "lucide-react"[m
+[31m -import { Users, UserCheck, BookOpen, Calendar, Award, ClipboardList } from "lucide-react"[m
+[31m -import { useDashboardData } from "../../hooks/useDashbordData"[m
+[32m++import {  Users, UserCheck, BookOpen, Calendar, Award, ClipboardList } from "lucide-react"[m
+[32m+ import { StatCard } from "./ui/stat-card"[m
+  import { AttendanceChart } from "./attendance-chart"[m
+[32m++import { useDashboardData } from "../../hooks/useDashbordData"[m
+  import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"[m
+  [m
+  [m

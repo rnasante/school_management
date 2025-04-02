@@ -1,0 +1,6 @@
+  backend            [m 41a2fc6e [[34morigin/backend[m: ahead 3] Merge branch 'backend' of https://github.com/rnasante/school_management into backend
+  backend-development[m 13f73a4e Add backend server using Express.js
+  clean-backend      [m 3fcb6fc1 Initial commit with clean history
+* [32mfrontend           [m 0aa8ab79 [[34morigin/frontend[m] integrated api  to get total student count
+  frontend-temp      [m 4d905b03 Refresh .gitignore and untrack ignored files
+  main               [m a38c80b2 [[34morigin/main[m: ahead 3] changes to .gitignore
