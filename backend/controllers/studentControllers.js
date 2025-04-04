@@ -1,5 +1,5 @@
 import { response } from 'express';
-import {  getStudentById, getAllStudents, getTotalStudentCount, updateStudent, deleteStudent } from '../services/studentServices.js';
+import {  getStudentById, getAllStudents, updateStudent, deleteStudent, getTotalStudentCount } from '../services/studentServices.js';
 
 
 export const getStudent = async (req, res) => {
@@ -83,6 +83,23 @@ export const removeStudent = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Error deleting student',
+      error: error.message
+    });
+  }
+};
+
+export const getTotalStudents = async (req, res) => {
+  try {
+    const count = await getTotalStudentCount();
+    res.status(200).json({
+      success: true,
+      count: count
+    });
+  } catch (error) {
+    console.error('Error in getTotalStudents controller:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching total student count',
       error: error.message
     });
   }

@@ -23,6 +23,9 @@ const studentFormSchema = z.object({
   lastName: z.string().min(2, {
     message: "Last name must be at least 2 characters.",
   }),
+  otherNames: z.string().min(2, {
+    message: "Other namesmust be at least 2 characters.",
+  }),
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
@@ -53,6 +56,7 @@ export function StudentForm() {
     defaultValues: {
       firstName: "",
       lastName: "",
+      otherNames: "",
       email: "",
       grade: "",
       class: "",
@@ -78,7 +82,7 @@ export function StudentForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 sm:grid-cols-1">
           <FormField
             control={form.control}
             name="firstName"
@@ -100,6 +104,19 @@ export function StudentForm() {
                 <FormLabel>Last Name</FormLabel>
                 <FormControl>
                   <Input placeholder="Doe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="otherNames"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Other Names</FormLabel>
+                <FormControl>
+                  <Input placeholder="Type other names here..." {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

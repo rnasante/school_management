@@ -1,5 +1,5 @@
 import express from 'express';
-import { allStudents, getStudent, updateStudentDetails, removeStudent, totalStudentsCount} from '../controllers/studentControllers.js';
+import { allStudents, getStudent, updateStudentDetails, removeStudent, getTotalStudents } from '../controllers/studentControllers.js';
 // import { checkUserPermission } from '../middleware/checkUserPermission.js';
 
 const router = express.Router();
@@ -7,8 +7,8 @@ const router = express.Router();
 // get all students
 router.get('/students',  allStudents);
 
-// get total students count
-router.get('/students/total', totalStudentsCount);
+// Get total student count
+router.get('/students/total', getTotalStudents);
 
 // Get student details by ID
 router.get('/student/:student_id',  getStudent);
