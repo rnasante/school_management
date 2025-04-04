@@ -1,5 +1,5 @@
 import { response } from 'express';
-import {  getStudentById, getAllStudents, totalStudents, updateStudent, deleteStudent } from '../services/studentServices.js';
+import {  getStudentById, getAllStudents, getTotalStudentCount, updateStudent, deleteStudent } from '../services/studentServices.js';
 
 
 export const getStudent = async (req, res) => {
@@ -40,7 +40,7 @@ export const allStudents = async (req, res) => {
 
 export const totalStudentsCount = async (req, res) => {
   try {
-    const totalStudentsNumber = await totalStudents();
+    const totalStudentsNumber = await getTotalStudentCount();
 
     res.status(200).json({
       success: true,
