@@ -1,14 +1,9 @@
 "use client"
 import Link from "next/link"
 import { useState } from "react"
-// import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-// import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-// import { Button } from "@/components/ui/button"
-// import { Input } from "@/components/ui/input"
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, MoreHorizontal, Search } from "lucide-react"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
-// import { Label } from "./ui/label"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
 
@@ -59,21 +54,23 @@ export function StudentsTable() {
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
-              <TableHead>Grade</TableHead>
+              <TableHead>School Level</TableHead>
+              <TableHead>Year</TableHead>
               <TableHead>Class</TableHead>
-              <TableHead>Attendance</TableHead>
-              <TableHead>GPA</TableHead>
+              {/* <TableHead>Attendance</TableHead>
+              <TableHead>GPA</TableHead> */}
               <TableHead className="w-[80px]">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredStudents.map((student) => (
               <TableRow key={student.id}>
-                <TableCell className="font-medium">{student.name}</TableCell>
-                <TableCell>{student.grade}</TableCell>
+                <TableCell className="font-medium">`${student.first_name} ${student.last_name} ${student.other_names}`</TableCell>
+                <TableCell>{student.schoolLevel}</TableCell>
+                <TableCell>{student.year}</TableCell>
                 <TableCell>{student.class}</TableCell>
-                <TableCell>{student.attendance}</TableCell>
-                <TableCell>{student.gpa}</TableCell>
+                {/* <TableCell>{student.attendance}</TableCell>
+                <TableCell>{student.gpa}</TableCell> */}
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
