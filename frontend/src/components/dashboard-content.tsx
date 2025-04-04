@@ -2,9 +2,9 @@
 
 import type React from "react"
 import { Users, UserCheck, BookOpen, Calendar, Award, ClipboardList } from "lucide-react"
-import { useDashboardData } from "../../hooks/useDashbordData"
 import { StatCard } from "./ui/stat-card"
 import { AttendanceChart } from "./attendance-chart"
+import { useDashboardData } from "../../hooks/useDashbordData"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 
 

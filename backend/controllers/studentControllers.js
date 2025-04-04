@@ -38,8 +38,6 @@ export const allStudents = async (req, res) => {
   }
 }
 
-
-
 export const updateStudentDetails = async (req, res) => {
   try {
     const result = await updateStudent(req.params.student_id, req.body);

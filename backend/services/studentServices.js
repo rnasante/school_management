@@ -1,26 +1,38 @@
 import { generateModelID } from '../utilities/idGenerator.js';
 import User from '../models/userModel.js';
 import Student from '../models/studentModel.js';
+import SchoolLevel from '../models/schoolLevelModel.js';
+import Year from '../models/classYearModel.js';
+import Class from '../models/classModel.js';
+
 
 
 export const getStudentById = async (student_id) => {
-  const student = await Student.findByPk(student_id
-    // include: [{
-    //   model: User,
-    //   as: 'user',
-    //   attributes: [ 'first_name']
-    // }]
-  );
+  const student = await Student.findByPk(student_id,
+  {include: [{
+      model: User,
+      as: 'user',
+      attributes: [ 'user_id']
+    }]
+  }
+);
   if (!student) throw new Error('Student not found');
   return student;
 };
 
 export const getAllStudents = async () => {
-   const allStudents = await Student.findAll();
+  const allStudents = await Student.findAll({
+    include: [
+      {model: SchoolLevel, as: 'schoolLevel', attributes: ['schoollevel_name']},
+      {model: Year, as: 'year', attributes: ['year_name']},
+      {model: Class, as: 'classInfo' , attributes: ['class_name']}
+     ],
+   });
 
-   if(!allStudents) throw new Error('Students not found');
 
-   return allStudents;
+  if(!allStudents) throw new Error('Students not found');
+
+  return allStudents;
 }
 
 export const updateStudent = async (student_id, updateData) => {
