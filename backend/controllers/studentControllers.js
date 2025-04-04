@@ -38,26 +38,6 @@ export const allStudents = async (req, res) => {
   }
 }
 
-export const totalStudentsCount = async (req, res) => {
-  try {
-    const totalStudentsNumber = await getTotalStudentCount();
-
-    res.status(200).json({
-      success: true,
-      message: 'Total students count fetched successfully',
-      count: totalStudentsNumber
-    });
-  } catch (error) {
-    console.error('Error in totalStudentsCount controller:', error);
-
-    res.status(500).json({
-      success: false,
-      message: 'Error fetching total students count',
-      error: error.message
-    });
-  }
-}
-
 export const updateStudentDetails = async (req, res) => {
   try {
     const result = await updateStudent(req.params.student_id, req.body);
