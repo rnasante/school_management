@@ -68,3 +68,13 @@ export const deleteStudent = async (student_id) => {
   
   await student.update({ status: 'inactive' });
 };
+
+export const getTotalStudentCount = async () => {
+  try {
+    const count = await Student.count();
+    return count;
+  } catch (error) {
+    console.error('Error getting total student count:', error);
+    throw new Error('Failed to get total student count');
+  }
+};
