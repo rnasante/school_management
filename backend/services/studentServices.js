@@ -23,14 +23,6 @@ export const getAllStudents = async () => {
    return allStudents;
 }
 
-export const totalStudents = async () => {
-  const totalStudents = await Student.count();
-
-  if(!totalStudents) throw new Error('Total Students not found');
-  
-  return totalStudents;
-}
-
 export const updateStudent = async (student_id, updateData) => {
   const student = await Student.findByPk(student_id);
   if (!student) throw new Error('Student not found');
@@ -75,4 +67,14 @@ export const deleteStudent = async (student_id) => {
   if (!student) throw new Error('Student not found');
   
   await student.update({ status: 'inactive' });
+};
+
+export const getTotalStudentCount = async () => {
+  try {
+    const count = await Student.count();
+    return count;
+  } catch (error) {
+    console.error('Error getting total student count:', error);
+    throw new Error('Failed to get total student count');
+  }
 };
