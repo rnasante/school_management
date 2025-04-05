@@ -4,13 +4,13 @@ import type React from "react"
 import { Users, UserCheck, BookOpen, Calendar, Award, ClipboardList } from "lucide-react"
 import { StatCard } from "./ui/stat-card"
 import { AttendanceChart } from "./attendance-chart"
-import { useDashboardData } from "../../hooks/useDashbordData"
+import { useTotalStudents } from "../../hooks/use-student"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card"
 
 
 export function DashboardContent() {
 
-  const { totalStudents, loading } = useDashboardData();
+  const { totalStudents, loading } = useTotalStudents();
 
   return (
     <div className="grid gap-6">

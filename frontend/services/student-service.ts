@@ -23,5 +23,7 @@ export async function getTotalStudents(): Promise<number> {
       throw new Error("Failed to fetch data");
     }
     const data = await response.json();
-    return data;
+    console.log("api data: ", data);
+
+    return data.students;
   }
