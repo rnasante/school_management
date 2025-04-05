@@ -1,3 +1,4 @@
+import './models/associations.js';
 import express from 'express';
 import redisClient from './config/redis.js';
 import passwordResetRoutes from './routes/passwordResetRoutes.js';
